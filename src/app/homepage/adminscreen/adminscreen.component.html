@@ -1,34 +1,36 @@
-<!-- Your admin screen content goes here -->
-
-<div style="background-color:#333;height:100vh;">
+<div style="background-color:#333; height:100vh; display: flex; flex-direction: column; justify-content: space-between;">
   <app-navbar></app-navbar>
   <div class="scroll-container">
-<section>
-  
-  <table class="table table-hover table-dark">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th>
-        <th scope="col">Total Price</th>
-        <th scope="col">Details</th>
+    <section>
       
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders; let i = index">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{ order.userName }}</td>
-        <td>{{ order.totalPrice | currency }}</td>
-        <td>
-          <button *ngIf="order.id !== undefined" (click)="showDetails(order.id)" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
-            Show Details
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-</section>
-</div>
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders; let i = index">
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ order.userName }}</td>
+            <td>{{ order.totalPrice | currency }}</td>
+            <td>
+              <button *ngIf="order.id !== undefined" (click)="showDetails(order.id)" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+                Show Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <div class="d-flex justify-content-center mb-3">
+    <button routerLink="/brands" class="btn btn-primary mx-2">View Brands</button>
+    <button routerLink="/categories" class="btn btn-primary mx-2">View Categories</button>
+    <button routerLink="/items" class="btn btn-primary mx-2">Items</button>
+  </div>
 </div>

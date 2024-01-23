@@ -12,6 +12,11 @@ import { userGuard } from './guards/user.guard';
 import { adminGuard } from './guards/admin.guard';
 import { ShoworderdetailsComponent } from './showorderdetails/showorderdetails/showorderdetails.component';
 import { ShowitemdetailsComponent } from './showitemdetails/showitemdetails/showitemdetails.component';
+import { BrandListComponent } from './homepage/admin-brand-screen/brand/brand.component';
+import { CategoryListComponent } from './homepage/adminCategoryScreen/category-screen/category-screen.component';
+import { ItemsComponent } from './homepage/adminItemsScreen/items/items.component';
+
+
 const routes: Routes = [
  { path: "",
     redirectTo: "mainpage",
@@ -64,6 +69,13 @@ const routes: Routes = [
     path: "signup",
   component: SignupComponent,
   },
+ { path: 'brands',
+  component: BrandListComponent,
+},{ path: 'categories',
+component: CategoryListComponent,
+},{ path: 'items',
+component: ItemsComponent,
+}
 ];
 
 @NgModule({

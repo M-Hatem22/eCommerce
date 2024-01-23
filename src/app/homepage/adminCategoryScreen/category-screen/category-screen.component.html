@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Page Title</title>
+  <!-- Add your other head elements (stylesheets, scripts, etc.) here -->
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .container {
+      background-color: #333;
+    }
+
+    .scroll-container {
+      min-height: 100vh; /* Set a minimum height */
+      overflow-y: auto;
+      background-color: #333; /* Move background color to .scroll-container */
+    }
+  </style>
+</head>
+
+<body class="scroll-container">
+  <app-navbar></app-navbar>
+
+  <div style="background-color: #333; height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="container mt-5">
+        
+        <!-- Add Category Form -->
+        <div *ngIf="newCategory !== null" class="mx-auto" style="width: 80%;">
+            <form>
+            <button class="btn btn-primary mb-3" (click)="addCategory()">reset values</button>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="newCategory.name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" (change)="handleImageFile($event)" required>
+          </div>
+          <button type="button" class="btn btn-success" (click)="saveCategory()">Save</button>
+        </form>
+      </div>
+
+      <!-- Category List -->
+      <table class="table mt-3" style="width: 80%;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categoryList">
+            <td style="color: white;">{{ category.id }}</td>
+            <td style="color: white;">{{category.name}}</td>
+            <td style="color: white;"><img src="{{ category.image }}" alt="{{ category.name }}" style="max-width: 100px; max-height: 100px;"></td>
+            <td>
+              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-danger">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center mb-3">
+        <button routerLink="/brands" class="btn btn-primary mx-2">View Brands</button>
+        <button routerLink="/categories" class="btn btn-primary mx-2">View Categories</button>
+        <button routerLink="/items" class="btn btn-primary mx-2">Items</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

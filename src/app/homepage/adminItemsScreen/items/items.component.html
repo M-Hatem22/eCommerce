@@ -1,0 +1,110 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Add your other head elements (stylesheets, scripts, etc.) here -->
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+        color: #fff;
+      }
+  
+      .container {
+        background-color: #333;
+      }
+  
+      .scroll-container {
+        min-height: 100vh; /* Set a minimum height */
+        overflow-y: auto;
+        background-color: #333; /* Move background color to .scroll-container */
+      }
+    </style>
+  </head>
+
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+    <div  class="container mt-3">
+      <form enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newItem.name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" class="form-control" id="description" [(ngModel)]="newItem.description" name="description" required>
+        </div>
+        <div class="mb-3">
+          <label for="brand" class="form-label">Brand</label>
+          <select class="form-select" id="brand" [(ngModel)]="newItem.brandId" name="brandid" required>
+            <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity in Inventory</label>
+            <input type="number" class="form-control" id="quantity" [(ngModel)]="newItem.quantityInInventory" name="quantity" required>
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" id="price" [(ngModel)]="newItem.price" name="price" required>
+          </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="file" class="form-control" (change)="handleImageFile($event)" required>
+        </div>
+        <!-- Add other form fields for Quantity, Price, etc. as needed -->
+        <button type="button" class="btn btn-success" (click)="saveItem()">Save</button>
+      </form>
+    </div>
+
+<div class="container mt-5 ">
+    <h2>Items</h2>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Brand</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td  style="color: white;">{{ item.id }}</td>
+          <td  style="color: white;">{{ item.name }}</td>
+          <td  style="color: white;">{{ item.description }}</td>
+          <td  style="color: white;">{{ item.brandName }}</td>
+          <td  style="color: white;">{{ item.category }}</td>
+          <td  style="color: white;">{{ item.price | currency }}</td>
+          <td  style="color: white;"><img [src]="item.image" alt="Item Image" style="max-width: 50px;"></td>
+        </tr>
+      </tbody>
+    </table>
+    <form enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="excelFile" class="form-label">Upload Excel File</label>
+            <input type="file" class="form-control" id="excelFile" (change)="handleExcelFile($event)" required>
+            <button type="button" class="btn btn-success mt-2" (click)="uploadExcel()">Upload Excel</button>
+          </div>
+
+          <div class="d-flex justify-content-center mb-3">
+            <button type="button" class="btn btn-info mt-2" (click)="downloadExcel()">Download Excel</button>
+          </div>
+    </form>
+
+    
+    <div class="d-flex justify-content-center mb-3">
+      <button routerLink="/brands" class="btn btn-primary mx-2">View Brands</button>
+      <button routerLink="/categories" class="btn btn-primary mx-2">View Categories</button>
+      <button routerLink="/items" class="btn btn-primary mx-2">Items</button>
+    </div>
+  </div>
+

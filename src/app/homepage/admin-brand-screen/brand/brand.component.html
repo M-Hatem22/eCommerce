@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Page Title</title>
+  <!-- Add your other head elements (stylesheets, scripts, etc.) here -->
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .container {
+      background-color: #333;
+    }
+
+    .scroll-container {
+      height: 100vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body class="scroll-container">
+  <app-navbar></app-navbar>
+  <div class="container mt-3">
+    <button class="btn btn-primary mb-3" (click)="addBrand()">Reset fields</button>
+
+    <!-- Add Brand Form -->
+    <div *ngIf="newBrand !== null" class="container mt-3" style="width: 80%;">
+      <form class="container mt-3">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" [(ngModel)]="newBrand.name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="file" class="form-control" id="image" (change)="handleImageFile($event)" name="image"
+            required>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select" id="category" [(ngModel)]="newBrand.categoryid" name="categoryid" required>
+            <option *ngFor="let category of categoryList" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-success" (click)="saveBrand()">Save</button>
+      </form>
+    </div>
+
+    <!-- Brand List -->
+    <table class="table mt-3" style="width: 80%;">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brandList">
+          <td style="color: white;">{{ brand.id }}</td>
+          <td style="color: white;">{{ brand.name }}</td>
+          <td style="color: white;"><img src="{{ brand.image }}" alt="{{ brand.name }}" style="max-width: 100px; max-height: 100px;"></td>
+          <td style="color: white;">{{ brand.category }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteBrand(brand.id)">Delete</button>
+            <button class="btn btn-primary" (click)="updateBrand(brand.id)">Update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center mb-3">
+      <button routerLink="/brands" class="btn btn-primary mx-2">View Brands</button>
+      <button routerLink="/categories" class="btn btn-primary mx-2">View Categories</button>
+      <button routerLink="/items" class="btn btn-primary mx-2">Items</button>
+    </div>
+  </div>
+  <!-- Add your body scripts here -->
+</body>
+
+</html>
